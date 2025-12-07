@@ -1,0 +1,178 @@
+/* --- RESET BÁSICO --- */
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    font-family: 'Arial', sans-serif;
+    background-color: #000; /* Color base negro */
+}
+
+#portada {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 100; /* Por encima de todo al inicio */
+    
+    /* ANIMACIÓN DEL FONDO QUE CAMBIA DE COLOR */
+    animation: cambioColor 12s infinite;
+    transition: opacity 3s ease-out, background-color 3s ease-out;
+}
+
+/* Definición de los colores de la animación */
+@keyframes cambioColor {
+    0%   { background-color: #001f3f; } /* Azul marino */
+    25%  { background-color: #800020; } /* Rojo vino */
+    50%  { background-color: #174b80; } /* Celeste oscuro */
+    75%  { background-color: #4ca296; } /* Verde oscuro */
+    100% { background-color: #001f3f; } /* Vuelta al azul marino */
+}
+
+/* ESTILOS DEL CUADRO Y BOTÓN */
+.cuadro-gatitos {
+    /* Estilo neón rojo alrededor del cuadro, como en tu imagen */
+    box-shadow: 0 0 20px 5px rgba(255, 0, 0, 0.6), inset 0 0 20px rgba(255,0,0,0.4);
+    border-radius: 15px;
+    padding: 10px;
+    background: rgba(0,0,0,0.3);
+    margin-bottom: 30px;
+}
+
+.cuadro-gatitos img {
+    display: block;
+    max-width: 250px; /* Ajusta el tamaño según tu imagen */
+    height: auto;
+    border-radius: 10px;
+}
+
+#botonPortada {
+    padding: 15px 30px;
+    font-family: 'Fredoka One', cursive, sans-serif; /* Fuente gordita */
+    font-size: 22px;
+    color: #fff;
+    /* Degradado rosa/rojo como el botón de "No" */
+    background: linear-gradient(45deg, #ff416c, #ff4b2b);
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(255, 65, 108, 0.4);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+#botonPortada:hover {
+    transform: scale(1.05); /* Crece un poco al pasar el mouse */
+    box-shadow: 0 8px 20px rgba(255, 65, 108, 0.6);
+}
+
+#botonPortada:active {
+    transform: scale(0.95); /* Se achica al hacer click */
+}
+
+#sorpresaContainer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0; /* Oculto al inicio */
+    transition: opacity 3s ease-in; /* Aparece suavemente */
+    z-index: 50;
+}
+
+/* Clase para mostrar el contenedor */
+#sorpresaContainer.show {
+    opacity: 1;
+}
+
+/* Clase para la transición final a negro */
+#portada.fade-out {
+    animation: none; /* Detiene el cambio de color */
+    background-color: #000; /* Se vuelve negro */
+    opacity: 0; /* Se desvanece */
+    pointer-events: none; /* Ya no se puede hacer click */
+}
+
+.container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden; /* Importante: evita barras de scroll si algo se sale */
+}
+
+#canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+#personajes {
+    position: absolute;
+    bottom: 0;          /* Siempre pegados al suelo */
+    left: 50%;          /* Centrados horizontalmente */
+    transform: translateX(-50%); /* Ajuste exacto del centro */
+    z-index: 10;        /* Encima de los fuegos */
+    pointer-events: none; /* Clicks traspasan */
+    
+    /* Sombra para integrarlos mejor con el fondo negro */
+    filter: drop-shadow(0 -10px 20px rgba(0,0,0,0.8));
+
+    /* --- REGLA 1: MÓVILES (Por defecto) --- */
+    /* En celular, mandan el ancho. Queremos que se vean grandes. */
+    width: 100%;         /* Ocupan el 90% del ancho de la pantalla */
+    height: auto;       /* La altura se calcula sola para no deformarse */
+    max-width: 500px;   /* Tope para que no exploten en tablets pequeñas */
+}
+
+/* --- REGLA 2: TABLETS Y LAPTOPS (Pantallas horizontales) --- */
+/* Cuando la pantalla es ancha (más de 768px), cambiamos la lógica */
+@media (min-width: 768px) {
+    #personajes {
+        /* En PC, ya no nos importa tanto el ancho, sino la altura. */
+        /* Queremos que ocupen una porción decente de abajo hacia arriba. */
+        width: auto;    /* El ancho se calcula solo */
+        height: 40vh;   /* Ocupan el 40% de la altura de la ventana */
+        
+        /* Ponemos un límite para monitores ultra-anchos */
+        max-height: 500px; 
+    }
+}
+
+#startButton {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 20;
+    padding: 15px 40px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #fff;
+    background: transparent;
+    border: 2px solid #fff;
+    border-radius: 30px;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 15px #fff;
+}
+
+#startButton:hover {
+    background: #fff;
+    color: #000;
+    box-shadow: 0 0 25px #fff, 0 0 50px #ff00de;
+}
+
+.hidden {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease-out;
+}
