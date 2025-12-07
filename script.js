@@ -56,8 +56,7 @@ function initTextPoints() {
     // Ajuste mínimo para que no sea ilegible en pantallas muy pequeñas
     if (fontSize < 30) fontSize = 30;
     
-    const fontStr = `${Math.floor(fontSize)}px "Pinyon Script", cursive`;
-    
+    const fontStr = `${Math.floor(fontSize)}px "Codystar", sans-serif`;    
     bCtx.font = fontStr;
     bCtx.textAlign = 'center';
     bCtx.textBaseline = 'middle';
