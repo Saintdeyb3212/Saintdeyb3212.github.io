@@ -14,7 +14,7 @@ let fireworks = [];
 let particles = [];
 
 // --- CONFIGURACIÓN BASE ---
-const TARGET_TEXT = "Ponte hermosa otra vez baby, que el martes te llevo a comer."; 
+const TARGET_TEXT = "Ponte hermosa otra vez baby, que este martes te llevare a comer."; 
 const TWO_PI = Math.PI * 2; 
 const PARTICLE_DENSITY = 3; // Densidad alta para buena definición
 const EXPLOSION_COUNT = 130; 
